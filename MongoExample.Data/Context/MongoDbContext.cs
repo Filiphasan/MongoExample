@@ -1,5 +1,4 @@
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 using MongoExample.Core.Entities;
@@ -19,14 +18,21 @@ public class MongoDbContext
 
     private static void ConfigureEntity()
     {
-        var conventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
-        ConventionRegistry.Register("camelCase", conventionPack, t => true);
+        // Set All Element Name CamelCase
+        // var conventionPack = new ConventionPack { new CamelCaseElementNameConvention() };
+        // ConventionRegistry.Register("camelCase", conventionPack, t => true);
 
         BsonClassMap.RegisterClassMap<Product>(cm =>
         {
             cm.AutoMap();
             cm.MapIdProperty(x => x.Id)
                 .SetIdGenerator(StringObjectIdGenerator.Instance);
+            cm.MapMember(x => x.Name)
+                .SetElementName("name");
+            cm.MapMember(x => x.Price)
+                .SetElementName("price");
+            cm.MapMember(x => x.Quantity)
+                .SetElementName("quantity");
         });
     }
 

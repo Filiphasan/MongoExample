@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoExample.API", "MongoExample.API\MongoExample.API.csproj", "{E6995D3B-A03B-4A5C-8F2D-54EE06F9321F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{89A1A719-1EB2-41C7-A364-88F1CE4DF956} = {89A1A719-1EB2-41C7-A364-88F1CE4DF956}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoExample.Core", "MongoExample.Core\MongoExample.Core.csproj", "{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoExample.Data", "MongoExample.Data\MongoExample.Data.csproj", "{89A1A719-1EB2-41C7-A364-88F1CE4DF956}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE} = {20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6995D3B-A03B-4A5C-8F2D-54EE06F9321F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6995D3B-A03B-4A5C-8F2D-54EE06F9321F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6995D3B-A03B-4A5C-8F2D-54EE06F9321F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6995D3B-A03B-4A5C-8F2D-54EE06F9321F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BE3E87-4789-4D68-9037-DA1F0B3D4DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A1A719-1EB2-41C7-A364-88F1CE4DF956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A1A719-1EB2-41C7-A364-88F1CE4DF956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A1A719-1EB2-41C7-A364-88F1CE4DF956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A1A719-1EB2-41C7-A364-88F1CE4DF956}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -4,14 +4,14 @@
     "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj": {}
   },
   "projects": {
-    "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj": {
+    "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/MongoExample.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj",
-        "projectName": "MongoExample.Data",
-        "projectPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj",
+        "projectUniqueName": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/MongoExample.Core.csproj",
+        "projectName": "MongoExample.Core",
+        "projectPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/MongoExample.Core.csproj",
         "packagesPath": "/Users/hasanerdal/.nuget/packages/",
-        "outputPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/obj/",
+        "outputPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/hasanerdal/.nuget/NuGet/NuGet.Config"
@@ -37,6 +37,69 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj",
+        "projectName": "MongoExample.Data",
+        "projectPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/MongoExample.Data.csproj",
+        "packagesPath": "/Users/hasanerdal/.nuget/packages/",
+        "outputPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hasanerdal/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/MongoExample.Core.csproj": {
+                "projectPath": "/Users/hasanerdal/Desktop/Software/Backend/MongoExample/MongoExample.Core/MongoExample.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.21.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

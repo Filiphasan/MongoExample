@@ -11,7 +11,7 @@ public class MongoDbContext
 
     public MongoDbContext(IMongoClient mongoClient)
     {
-        _database = mongoClient.GetDatabase("ECommerce");
+        _database = mongoClient.GetDatabase("Cluster0");
 
         ConfigureEntity();
     }
@@ -35,6 +35,8 @@ public class MongoDbContext
                 .SetElementName("quantity");
         });
     }
+
+    public IMongoCollection<Product> Products => _database.GetCollection<Product>(nameof(Product));
 
     public IMongoCollection<TEntity> GetCollection<TEntity>()
     {

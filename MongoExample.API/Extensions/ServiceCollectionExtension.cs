@@ -10,7 +10,7 @@ public static class ServiceCollectionExtension
     public static IServiceCollection RegisterMyServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IMongoClient>(new MongoClient(configuration.GetConnectionString("MongoDb")));
-        services.AddScoped<MongoDbContext>();
+        services.AddSingleton<MongoDbContext>();
 
         services.AddTransient<IProductService, ProductService>();
 

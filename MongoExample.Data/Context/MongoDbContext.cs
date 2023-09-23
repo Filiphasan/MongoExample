@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
@@ -9,9 +10,9 @@ public class MongoDbContext
 {
     private readonly IMongoDatabase _database;
 
-    public MongoDbContext(IMongoClient mongoClient)
+    public MongoDbContext(IMongoClient mongoClient, IConfiguration configuration)
     {
-        _database = mongoClient.GetDatabase("Cluster0");
+        _database = mongoClient.GetDatabase(configuration["MongoDbSettings:DatabaseName"]);
 
         ConfigureEntity();
     }
@@ -27,6 +28,8 @@ public class MongoDbContext
             cm.AutoMap();
             cm.MapIdProperty(x => x.Id)
                 .SetIdGenerator(StringObjectIdGenerator.Instance);
+            cm.MapMember(x => x.Id)
+                .SetElementName("id");
             cm.MapMember(x => x.Name)
                 .SetElementName("name");
             cm.MapMember(x => x.Price)
@@ -36,10 +39,14 @@ public class MongoDbContext
         });
     }
 
+    //Database
+    public IMongoDatabase Database => _database;
+
+    //Collections
     public IMongoCollection<Product> Products => _database.GetCollection<Product>(nameof(Product));
 
-    public IMongoCollection<TEntity> GetCollection<TEntity>()
+    public IMongoCollection<TEntity> GetCollection<TEntity>(MongoCollectionSettings settings = null)
     {
-        return _database.GetCollection<TEntity>(typeof(TEntity).Name);
+        return _database.GetCollection<TEntity>(typeof(TEntity).Name, settings);
     }
 }

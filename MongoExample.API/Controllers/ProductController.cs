@@ -25,4 +25,24 @@ public class ProductController : ControllerBase
 
         return StatusCode(result.StatusCode, result);
     }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseModel<ProductListResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 500)]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var result = await _productService.GetAllAsync();
+
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ResponseModel<ProductListResponseItem>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 500)]
+    public async Task<IActionResult> GetAllAsync([FromRoute] string id)
+    {
+        var result = await _productService.GetByIdAsync(id);
+
+        return StatusCode(result.StatusCode, result);
+    }
 }

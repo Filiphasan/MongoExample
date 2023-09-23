@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using MongoExample.API.Models;
 using MongoExample.API.Models.Product;
 using MongoExample.API.Services.Interfaces;
@@ -39,6 +40,58 @@ public class ProductService : IProductService
         {
             _logger.LogError(ex, "Error adding product");
             return ResponseModel<ProductResponseModel>.SendException(ex);
+        }
+    }
+
+    public async Task<ResponseModel<ProductListResponseModel>> GetAllAsync()
+    {
+        try
+        {
+            var response = new ProductListResponseModel();
+
+            var data = await _context.Products.FindAsync(FilterDefinition<Product>.Empty);
+
+            var list = await data.ToListAsync();
+
+            response.Products = list.Select(x => new ProductListResponseItem()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Quantity = x.Quantity,
+                Price = x.Price,
+            }).ToList();
+            response.TotalCount = list.Count;
+
+            return ResponseModel<ProductListResponseModel>.SendSuccess(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error get all product");
+            return ResponseModel<ProductListResponseModel>.SendException(ex);
+        }
+    }
+
+    public async Task<ResponseModel<ProductListResponseItem>> GetByIdAsync(string id)
+    {
+        try
+        {
+            var data = await _context.Products.FindAsync(x => x.Id == id);
+
+            var product = await data.FirstOrDefaultAsync();
+            var response = new ProductListResponseItem
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Quantity = product.Quantity,
+                Price = product.Price,
+            };
+
+            return ResponseModel<ProductListResponseItem>.SendSuccess(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error get all product");
+            return ResponseModel<ProductListResponseItem>.SendException(ex);
         }
     }
 }

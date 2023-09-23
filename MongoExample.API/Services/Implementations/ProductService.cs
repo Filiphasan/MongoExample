@@ -94,4 +94,22 @@ public class ProductService : IProductService
             return ResponseModel<ProductListResponseItem>.SendException(ex);
         }
     }
+
+    public async Task<ResponseModel<ProductDeleteResponseModel>> DeleteAsync(string id)
+    {
+        try
+        {
+            var response = new ProductDeleteResponseModel();
+
+            await _context.Products.DeleteOneAsync(x => x.Id == id);
+
+            response.Message = "Product deleted successfully";
+            return ResponseModel<ProductDeleteResponseModel>.SendSuccess(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error get all product");
+            return ResponseModel<ProductDeleteResponseModel>.SendException(ex);
+        }
+    }
 }

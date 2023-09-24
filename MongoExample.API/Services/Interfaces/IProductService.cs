@@ -9,4 +9,5 @@ public interface IProductService
     Task<ResponseModel<ProductListResponseModel>> GetAllAsync();
     Task<ResponseModel<ProductListResponseItem>> GetByIdAsync(string id);
     Task<ResponseModel<ProductDeleteResponseModel>> DeleteAsync(string id);
+    Task<ResponseModel<ProductUpdateResponseModel>> UpdateAsync(string id, ProductRequestModel model);
 }

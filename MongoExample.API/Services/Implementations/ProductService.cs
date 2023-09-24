@@ -90,7 +90,7 @@ public class ProductService : IProductService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error get all product");
+            _logger.LogError(ex, "Error get product {id}", id);
             return ResponseModel<ProductListResponseItem>.SendException(ex);
         }
     }
@@ -108,8 +108,31 @@ public class ProductService : IProductService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error get all product");
+            _logger.LogError(ex, "Error delete product {id}", id);
             return ResponseModel<ProductDeleteResponseModel>.SendException(ex);
+        }
+    }
+
+    public async Task<ResponseModel<ProductUpdateResponseModel>> UpdateAsync(string id, ProductRequestModel model)
+    {
+        try
+        {
+            var response = new ProductUpdateResponseModel();
+
+            var update = Builders<Product>.Update
+                .Set(x => x.Name, model.Name)
+                .Set(x => x.Quantity, model.Quantity)
+                .Set(x => x.Price, model.Price);
+
+            await _context.Products.UpdateOneAsync(x => x.Id == id, update);
+
+            response.Message = "Product updated successfully";
+            return ResponseModel<ProductUpdateResponseModel>.SendSuccess(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error update product {id}", id);
+            return ResponseModel<ProductUpdateResponseModel>.SendException(ex);
         }
     }
 }

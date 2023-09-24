@@ -18,6 +18,7 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(typeof(ResponseModel<ProductResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
     [ProducesResponseType(typeof(ResponseModel<>), 500)]
     public async Task<IActionResult> AddAsync([FromBody] ProductRequestModel requestModel)
     {
@@ -28,6 +29,7 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(ResponseModel<ProductListResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
     [ProducesResponseType(typeof(ResponseModel<>), 500)]
     public async Task<IActionResult> GetAllAsync()
     {
@@ -38,10 +40,33 @@ public class ProductController : ControllerBase
 
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ResponseModel<ProductListResponseItem>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
     [ProducesResponseType(typeof(ResponseModel<>), 500)]
-    public async Task<IActionResult> GetAllAsync([FromRoute] string id)
+    public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
     {
         var result = await _productService.GetByIdAsync(id);
+
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(ResponseModel<ProductDeleteResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
+    [ProducesResponseType(typeof(ResponseModel<>), 500)]
+    public async Task<IActionResult> DeleteByIdAsync([FromRoute] string id)
+    {
+        var result = await _productService.DeleteAsync(id);
+
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(ResponseModel<ProductUpdateResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
+    [ProducesResponseType(typeof(ResponseModel<>), 500)]
+    public async Task<IActionResult> UpdateAsync([FromRoute] string id, [FromBody] ProductRequestModel requestModel)
+    {
+        var result = await _productService.UpdateAsync(id, requestModel);
 
         return StatusCode(result.StatusCode, result);
     }

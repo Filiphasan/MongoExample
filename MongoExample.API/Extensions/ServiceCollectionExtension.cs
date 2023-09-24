@@ -1,4 +1,5 @@
 using MongoDB.Driver;
+using MongoExample.API.Middlewares;
 using MongoExample.API.Services.Implementations;
 using MongoExample.API.Services.Interfaces;
 using MongoExample.Data.Context;
@@ -12,8 +13,12 @@ public static class ServiceCollectionExtension
         services.AddSingleton<IMongoClient>(new MongoClient(configuration.GetConnectionString("MongoDb")));
         services.AddSingleton<MongoDbContext>();
 
+        //Services
         services.AddTransient<IProductService, ProductService>();
 
+        //Middlewares
+        services.AddTransient<ExceptionMiddleware>();
+        
         return services;
     }
 }

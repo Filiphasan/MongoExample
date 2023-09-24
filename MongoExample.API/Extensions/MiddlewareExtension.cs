@@ -4,8 +4,13 @@ namespace MongoExample.API.Extensions;
 
 public static class MiddlewareExtension
 {
-    public static void RegisterMiddlewares(this IApplicationBuilder builder)
+    public static void RegisterMiddlewares(this IApplicationBuilder app)
     {
-        builder.UseMiddleware<ExceptionMiddleware>();
+        if (app == null)
+        {
+            throw new ArgumentNullException(nameof(app));
+        }
+        
+        app.UseMiddleware<ExceptionMiddleware>();
     }
 }

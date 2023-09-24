@@ -10,6 +10,11 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection RegisterMyServices(this IServiceCollection services, IConfiguration configuration)
     {
+        if (services == null)
+        {
+            throw new ArgumentNullException(nameof(services));
+        }
+        
         services.AddSingleton<IMongoClient>(new MongoClient(configuration.GetConnectionString("MongoDb")));
         services.AddSingleton<MongoDbContext>();
 

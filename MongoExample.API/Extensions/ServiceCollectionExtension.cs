@@ -14,16 +14,16 @@ public static class ServiceCollectionExtension
         {
             throw new ArgumentNullException(nameof(services));
         }
-        
+
         services.AddSingleton<IMongoClient>(new MongoClient(configuration.GetConnectionString("MongoDb")));
         services.AddSingleton<MongoDbContext>();
 
         //Services
-        services.AddTransient<IProductService, ProductService>();
+        services.AddScoped<IProductService, ProductService>();
 
         //Middlewares
         services.AddTransient<ExceptionMiddleware>();
-        
+
         return services;
     }
 }

@@ -11,11 +11,41 @@ public class ProductService : IProductService
 {
     private readonly MongoDbContext _context;
     private readonly ILogger<ProductService> _logger;
+    private readonly IConfiguration _configuration;
 
-    public ProductService(MongoDbContext context, ILogger<ProductService> logger)
+    public ProductService(MongoDbContext context, ILogger<ProductService> logger, IConfiguration configuration)
     {
         _context = context;
         _logger = logger;
+        _configuration = configuration;
+    }
+
+    public async Task<ResponseModel<ProductResponseModel>> AddProductManuelAsync(ProductRequestModel model)
+    {
+        try
+        {
+            var response = new ProductResponseModel();
+            var mongoClient = new MongoClient(_configuration.GetConnectionString("MongoDb"));
+
+            var database = mongoClient.GetDatabase(_configuration["MongoDbSettings:DatabaseName"]);
+
+            var collection = database.GetCollection<Product>(nameof(Product));
+
+            await collection.InsertOneAsync(new Product()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Quantity = model.Quantity,
+            });
+
+            response.Message = "Product added successfully";
+            return ResponseModel<ProductResponseModel>.SendSuccess(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error adding product");
+            return ResponseModel<ProductResponseModel>.SendException(ex);
+        }
     }
 
     public async Task<ResponseModel<ProductResponseModel>> AddProductAsync(ProductRequestModel model)

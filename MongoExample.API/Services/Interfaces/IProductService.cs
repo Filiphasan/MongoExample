@@ -5,6 +5,7 @@ namespace MongoExample.API.Services.Interfaces;
 
 public interface IProductService
 {
+    Task<ResponseModel<ProductResponseModel>> AddProductManuelAsync(ProductRequestModel model);
     Task<ResponseModel<ProductResponseModel>> AddProductAsync(ProductRequestModel model);
     Task<ResponseModel<ProductListResponseModel>> GetAllAsync();
     Task<ResponseModel<ProductListResponseItem>> GetByIdAsync(string id);

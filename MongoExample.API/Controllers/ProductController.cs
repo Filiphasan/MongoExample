@@ -15,6 +15,18 @@ public class ProductController : ControllerBase
     {
         _productService = productService;
     }
+    
+    
+    [HttpPost("")]
+    [ProducesResponseType(typeof(ResponseModel<ProductResponseModel>), 200)]
+    [ProducesResponseType(typeof(ResponseModel<>), 400)]
+    [ProducesResponseType(typeof(ResponseModel<>), 500)]
+    public async Task<IActionResult> AddManuelAsync([FromBody] ProductRequestModel requestModel)
+    {
+        var result = await _productService.AddProductManuelAsync(requestModel);
+
+        return StatusCode(result.StatusCode, result);
+    }
 
     [HttpPost]
     [ProducesResponseType(typeof(ResponseModel<ProductResponseModel>), 200)]
